@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+
+{% block script %}
+<script>
+    
+    const connection = new WebSocket('ws://192.168.158.94:81/');
+        var button_1_status = 0;
+        var button_2_status = 0;        
+        var temp_data = 0;
+        var hum_data = 0;
+        var pir_stat = 0;
+        var curStat = 0;
+        var swc_stat = 0;
+        connection.onmessage = function(event){
+            var full_data = event.data;
+            var data = JSON.parse(full_data);
+            temp_data = data.temp;
+            hum_data = data.hum;
+            pir_stat = data.stat;
+            swch_stat = data.swch_stat;
+            curStat = data.curr_stat;
+        
+            if (temp_data !== undefined && hum_data !== undefined){
+                temp_hum_data();
+            }
+            if (pir_stat !== undefined){
+                pir_data();
+            }
+            if (swch_stat !== undefined){
+                limit_switch();
+            }
+            if (curStat !== undefined){
+                current_data();
+            }                
+        }        
+        function button_1_on() {
+            button_1_status = 0;
+            console.log("LED 1 is ON");
+            send_data();
+    
+        }
+        function button_1_off() {
+            button_1_status = 1;
+            console.log("LED 1 is OFF");
+            send_data();
+    
+        }
+        function button_2_on() {
+            button_2_status = 0;
+            console.log("LED 2 is ON");
+            send_data();
+    
+        }
+        function button_2_off() {
+            button_2_status = 1;
+            console.log("LED 2 is OFF");
+            send_data();
+    
+        }
+
+        function temp_hum_data(){
+            //document.getElementById("temp_meter").value = temp_data;
+            document.getElementById("temp_value").innerHTML = temp_data;
+            //document.getElementById("hum_meter").value = hum_data;
+            document.getElementById("hum_value").innerHTML = hum_data;
+        }
+
+        function pir_data(){
+            
+            if (pir_stat == 1){
+                document.getElementById("text").innerHTML = "THREAT";
+            } else{
+                document.getElementById("text").innerHTML = "NO THREAT";
+            }
+        }
+        function current_data(){
+            document.getElementById("cur_id").value = curStat;
+        }
+
+        function limit_switch(){
+            
+            if (swch_stat == 1){
+            document.getElementById("swc_text").innerHTML = "door is opened";
+            } else{
+            document.getElementById("swc_text").innerHTML = " door is closed";
+
+            }
+
+        }
+        
+        function send_data() {
+            var full_data = '{"LED1" :' + button_1_status + ',"LED2":' + button_2_status + '}';
+            connection.send(full_data);
+            //alert(full_data);
+        }
+    </script>
+{% endblock script %}
+{% block content %}
+
+<!-- <center>
+    <h1>My Home Automation</h1>
+    <h3> LED 1 </h3>
+    <button onclick="button_1_on()">On</button><button onclick="button_1_off()">Off</button>
+    <h3> LED 2 </h3>
+    <button onclick="button_2_on()">On</button><button onclick="button_2_off()">Off</button>
+</center>
+
+<div style="text-align: center;">
+    <h3>Temperature</h3><meter value="2" min="0" max="100" id="temp_meter"> </meter>
+    <h3 id="temp_value" style="display: inline-block;"> 2 C</h3>
+    <h3>Humidity</h3><meter value="2" min="0" max="100" id="hum_meter"> </meter>
+    <h3 id="hum_value" style="display: inline-block;"> 2 %</h3>
+</div>
+
+<div style="text-align: center;">
+    <h3>PIR Sensor</h3>
+    <p id="text">No motion Detected</p>   
+</div>
+<div style="text-align: center;">
+    <h3>Door Sensor</h3>
+    <p id="swc_text">door is opened</p>   
+</div>
+<div style="text-align: center;">
+    
+    <h3>Current Value</h3><input value="0" min="0" max="30" id="cur_id">
+    
+</div> -->
+
+
+<div class="container">
+    <section class="main">
+    
+        <ul class="ch-grid">
+            <li>
+                <div class="ch-item ch-img-1">				
+                    <div class="ch-info-wrap">
+                        <div class="ch-info">
+                            <div class="ch-info-front ch-img-1"></div>
+                            <div class="ch-info-back">
+                                  <br></br>
+                                <h3 id="hum_value">35<p>%</p></h3>
+                                
+                            </div>	
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            <li>
+                <div class="ch-item ch-img-2">
+                    <div class="ch-info-wrap">
+                        <div class="ch-info">
+                            <div class="ch-info-front ch-img-2"></div>
+                            <div class="ch-info-back">
+                                <br></br>
+                                <h3 id="swc_text">door is closed</h3>
+            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            <li>
+                <div class="ch-item ch-img-3">				
+                    <div class="ch-info-wrap">
+                        <div class="ch-info">
+                            <div class="ch-info-front ch-img-3"></div>
+                            <div class="ch-info-back">
+                                <br></br>
+                                <h3 value="0" min="0" max="30" id="cur_id">0 <p>Amps</p></h3>  
+                            </div>	
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="ch-item ch-img-4">				
+                    <div class="ch-info-wrap">
+                        <div class="ch-info">
+                            <div class="ch-info-front ch-img-4"></div>
+                            <div class="ch-info-back">
+                                <button style="margin-top: 45%;" onclick="button_1_on()">On</button>
+                                <button onclick="button_1_off()">Off</button>    
+                            </div>	
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="ch-grid">
+            <li>
+                <div class="ch-item ch-img-5">				
+                    <div class="ch-info-wrap">
+                        <div class="ch-info">
+                            <div class="ch-info-front ch-img-5"></div>
+                            <div class="ch-info-back">
+                                <br></br>
+                                <h3 id="temp_value">38<p>°C</p></h3>
+                                
+                            </div>	
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            <li>
+                <div class="ch-item ch-img-6">
+                    <div class="ch-info-wrap">
+                        <div class="ch-info">
+                            <div class="ch-info-front ch-img-6"></div>
+                            <div class="ch-info-back">
+                                
+                                <h3 id="text">No Threat</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            <li>
+                <div class="ch-item ch-img-7">				
+                    <div class="ch-info-wrap">
+                        <div class="ch-info">
+                            <div class="ch-info-front ch-img-7"></div>
+                            <div class="ch-info-back">
+                                <br>	</br>
+                                <h3>9 W</h3>
+                                
+                            </div>	
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="ch-item ch-img-8">				
+                    <div class="ch-info-wrap">
+                        <div class="ch-info">
+                            <div class="ch-info-front ch-img-8"></div>
+                            <div class="ch-info-back">
+                                <button style="margin-top: 45%;" onclick="button_2_on()">On</button>
+                                <button onclick="button_2_off()">Off</button>
+                                
+                            </div>	
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>	
+    </section>   
+</div>
+
+<!--toast message-->
+<div id="ToastMessage" class="toast text-white" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+        No Threat
+    </div>
+  </div>
+  <!--/toast message-->
+
+
+
+{% endblock content %}
