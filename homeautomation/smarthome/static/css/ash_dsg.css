@@ -76,7 +76,7 @@
 .ch-info-wrap {
 	top: 20px;
 	left: 20px;
-	background: #f9f9f9 url(../images/bg.jpg);
+	background: #f9f9f9;
 	box-shadow: 
 		0 0 0 20px rgba(255,255,255,0.2), 
 		inset 0 0 3px rgba(115,114, 23, 0.8);
@@ -92,6 +92,7 @@
 	background-position: center center;
 		
 	-webkit-backface-visibility: hidden; /*Just for webkit to have a smooth font*/
+	backface-visibility: hidden;
 }
 
 /*.ch-info .ch-info-front {

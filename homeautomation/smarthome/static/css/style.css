@@ -116,26 +116,3 @@
 .ch-item:hover .ch-info p {
 	opacity: 1;
 }
-
-#ToastMessage {
-	top: 100px;
-	left: 1230px;
-	z-index: 1000;
-	position: relative;
-	width: 300px;
-	height: auto;
-	box-shadow: 0 0 20px 0 #ccc;
-	border-radius: 5px;
-	background-color: black;
-	display: block;
-  }
-  
-  .toast {
-	text-align: right;
-  }
-  
-  .toast-body {
-	padding: 15px 15px 15px 15px;
-	margin-top: 5px;
-	font-family: Arial, Helvetica, sans-serif;
-  }
