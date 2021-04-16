@@ -11,6 +11,7 @@
         var pir_stat = 0;
         var curStat = 0;
         var swc_stat = 0;
+        var Power = 0;
         connection.onmessage = function(event){
             var full_data = event.data;
             var data = JSON.parse(full_data);
@@ -87,6 +88,8 @@
         // current sensor function
         function current_data(){
             document.getElementById("cur_id").value = curStat;
+            Power = 230 * curStat;
+            document.getElementById("pow_id").value = Power;
         }
 
         // limit sensor function
@@ -243,10 +246,8 @@
                         <div class="ch-info">
                             <div class="ch-info-front ch-img-7"></div>
                             <div class="ch-info-back">
-                                <br></br>
-                                <br></br>
-                                <h3>9 W</h3>
-                                
+                                <input style="margin-top: 65%;width: 50%;text-align: center;" value="0" min="0" max="30" id="pow_id">
+                                <h3 style="margin-top: 0%;padding-top: 0px;font-size: 20px;">Watt</h3>
                             </div>	
                         </div>
                     </div>
