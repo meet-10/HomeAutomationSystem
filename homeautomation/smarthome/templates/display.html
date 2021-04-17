@@ -70,9 +70,9 @@
         // temperature-humidity function
         function temp_hum_data(){
             //document.getElementById("temp_meter").value = temp_data;
-            document.getElementById("temp_value").innerHTML = temp_data;
+            document.getElementById("temp_value").innerHTML = temp_data + '<sup>o</sup>C';
             //document.getElementById("hum_meter").value = hum_data;
-            document.getElementById("hum_value").innerHTML = hum_data;
+            document.getElementById("hum_value").innerHTML = hum_data + '%';
         }
 
         // pir Sensor function
@@ -159,7 +159,7 @@
                                   <br></br>
                                   <br></br>
 
-                                <h3 id="hum_value">35<p>%</p></h3>
+                                <h3 id="hum_value">35</h3>
                                 
                             </div>	
                         </div>
@@ -220,7 +220,7 @@
                             <div class="ch-info-back">
                                 <br></br>
                                 <br></br>
-                                <h3 id="temp_value">38<p>°C</p></h3>	
+                                <h3 id="temp_value">38</h3>	
                             </div>	
                         </div>
                     </div>
