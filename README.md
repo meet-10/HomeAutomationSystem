@@ -8,5 +8,5 @@
 * Lastly this system also measure power consumption of appliances in home.
 * All the data obtained from System will be displayed on web App which would help user to monitor , control , visualize and analyze all home activities from a single location.
 
-*[DEMO VIDEO FOR HOME AUTOMATION PROJECT](https://drive.google.com/file/d/1hxNt1KMWpn8HKEWX5DDsEIogDogp_tUm/view?usp=sharing)
-*[DEMO VIDEO FOR TWO FACTOR AUTHENTICATION TO WEB APPLICATION](https://drive.google.com/file/d/1tdmgAQZnmjnZQwXdV6--FKMbUSlu9Zlx/view?usp=sharing)
+* [DEMO VIDEO FOR HOME AUTOMATION PROJECT](https://drive.google.com/file/d/1hxNt1KMWpn8HKEWX5DDsEIogDogp_tUm/view?usp=sharing)
+* [DEMO VIDEO FOR TWO FACTOR AUTHENTICATION TO WEB APPLICATION](https://drive.google.com/file/d/1tdmgAQZnmjnZQwXdV6--FKMbUSlu9Zlx/view?usp=sharing)
