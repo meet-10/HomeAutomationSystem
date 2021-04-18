@@ -16,11 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import  include, url
 from django.urls import path
-from smarthome import views
+from .views import home_view, auth_view, verify_view
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    path('', views.display),
-    path('token',views.token),
-]    
+    path('display/', home_view, name='home-view'),
+    path('', auth_view, name='login-view'),
+    path('verify/', verify_view, name='verify-view'),
+]  
+
+urlpatterns += staticfiles_urlpatterns()

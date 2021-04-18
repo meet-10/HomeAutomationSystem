@@ -1,3 +1,4 @@
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +7,13 @@
     <title>Smart Home Automation System</title>
     <meta name="description" content="Circle Hover Effects with CSS Transitions" />
     <meta name="keywords" content="circle, border-radius, hover, css3, transition, image, thumbnail, effect, 3d" />
-    <link rel="shortcut icon" href="../favicon.ico"> 
-    <link rel="stylesheet" type="text/css" href="static/css/demo.css" /> 
-    <link rel="stylesheet" type="text/css" href="static/css/common.css" />
-    <link rel="stylesheet" type="text/css" href="static/css/ash_dsg.css" />
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/demo.css' %}" /> 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ash_dsg.css' %}" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,700' rel='stylesheet' type='text/css' />
+    {% block extra_head %}{% endblock %}
+    
 </head>
 <body>
     {% block script %}{% endblock script %}
@@ -18,9 +21,8 @@
         <div class="header" >
           <a href="#default" class="logo">Smart Home Automation System</a>
           <div class="header-right">
-            <a class="active" href="#My Dashboard">My Dashboard</a>
-            <a href="#Literature">Literature</a>
-            <a href="#Login">Login</a>
+            <a href='' name='login-view' class="btn btn-primary">My Dashboard</a>
+            <!--<a href="auth.html">Logout</a> -->
           </div>
         </div>
     {% block content %}{% endblock content %}
